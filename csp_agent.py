@@ -128,7 +128,6 @@ class CSPAgent:
                 for s2 in self.knowledge:
                     if s1 == s2: continue
 
-                    # --- FIXED TYPOS HERE ---
                     if s1.cells.issubset(s2.cells):
                         diff_cells = s2.cells - s1.cells # Use MINUS, not EQUALS
                         diff_count = s2.count - s1.count # Use MINUS, not EQUALS
