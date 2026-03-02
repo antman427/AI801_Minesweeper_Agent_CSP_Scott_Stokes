@@ -2,6 +2,7 @@ from minesweeper_env import MinesweeperEnv
 from csp_agent import CSPAgent
 from hybrid_agent import HybridAgent
 from smart_agent import SmartAgent
+from mcmc_agent import MCMCAgent
 import time
 
 def evaluate_agent(agent_class, num_games=100, width=16, height=16, mines=40):
@@ -42,7 +43,7 @@ if __name__ == "__main__":
     GAMES = 100
     WIDTH = 16
     HEIGHT = 16
-    MINES = 100 
+    MINES = 60
     
     print(f"=== Testing Agents: {WIDTH}x{HEIGHT} Board, {MINES} Mines ===")
     
@@ -54,7 +55,10 @@ if __name__ == "__main__":
     
     # 3) Test Storm's Smart Agent
     smt_win, smt_time = evaluate_agent(SmartAgent, GAMES, WIDTH, HEIGHT, MINES)
-    
+
+    # 4) Test Markov Chain Monte Carlo (MCMC) Agent
+    mcmc_win, mcmc_time = evaluate_agent(MCMCAgent, GAMES, WIDTH, HEIGHT, MINES)
+
     # Print Results
     print("\n" + "=" * 42)
     print(f"{'AGENT':<20} | {'WIN RATE':<10} | {'TIME/GAME':<10}")
@@ -62,6 +66,7 @@ if __name__ == "__main__":
     print(f"{'Tony\'s CSP':<20} | {csp_win:>8.1f}% | {csp_time:>8.4f}s")
     print(f"{'Tony\'s Hybrid':<20} | {hyb_win:>8.1f}% | {hyb_time:>8.4f}s")
     print(f"{'Storm\'s SmartAgent':<20} | {smt_win:>8.1f}% | {smt_time:>8.4f}s")
+    print(f"{'MCMC Agent':<20} | {mcmc_win:>8.1f}% | {mcmc_time:>8.4f}s")
     print("=" * 42)
     
     # Print winner
@@ -72,3 +77,5 @@ if __name__ == "__main__":
         print("\nCONCLUSION: Storm's Smart Agent wins!")
     elif best_win_rate == csp_win:
         print("\nCONCLUSION: Tony\'s CSP Agent wins!")
+    elif best_win_rate == mcmc_win:
+        print("\nCONCLUSION: MCMC Agent wins!")
