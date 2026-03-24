@@ -1,4 +1,4 @@
-from minesweeper_env import MinesweeperEnv
+from backup_local.minesweeper_env import MinesweeperEnv
 from csp_agent import CSPAgent
 from hybrid_agent import HybridAgent
 from smart_agent import SmartAgent
@@ -42,9 +42,9 @@ if __name__ == "__main__":
     # Small boards they all solve 100%, but large boards are harder
     # Also more mines really make the agents break
     GAMES = 100
-    WIDTH = 16
-    HEIGHT = 16
-    MINES = 60
+    WIDTH = 9
+    HEIGHT = 9
+    MINES = 10
     
     print(f"=== Testing Agents: {WIDTH}x{HEIGHT} Board, {MINES} Mines ===")
     

@@ -1,4 +1,4 @@
-from minesweeper_env import MinesweeperEnv
+from backup_local.minesweeper_env import MinesweeperEnv
 from csp_agent import CSPAgent
 import time
 import itertools

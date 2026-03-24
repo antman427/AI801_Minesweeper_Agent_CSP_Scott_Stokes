@@ -1,3 +1,16 @@
+"""
+CSPStormAgent
+
+A Minesweeper agent that uses:
+1. CSP-style logical inference to identify safe cells and mines
+2. subset-based sentence inference for additional deductions
+3. a heuristic risk-based fallback when no guaranteed safe move exists
+
+Note:
+The fallback is a local risk heuristic based on current CSP constraints.
+It is not a full joint probability solver.
+"""
+
 import os
 import sys
 
@@ -8,6 +21,11 @@ from backup_local.minesweeper_viz import clear_screen, print_board, print_header
 
 import random
 import time
+
+DEBUG = False
+SHOW_BOARD_DEFAULT = True
+INTERACTIVE_DEFAULT = True
+PAUSE_DEFAULT = 0.5
 
 class Sentence:
     """
@@ -148,14 +166,20 @@ class CSPStormAgent:
             self.knowledge.extend(new_sentences)
 
     def probabilistic_guess(self, obs):
-        """Choose the cell with the lowest estimated mine probability."""
+        """
+        Heuristic fallback used when no guaranteed safe move exists. 
+        Chooses the hidden cell with the lowest estimated local mine risk.
+        If multiple cells tie, prefer the one supported by more CSP clues.
+        If still tied, prefer corners.
+        """
     
-        risk_scores = {}
+        candidates = []
 
         for r in range(self.rows):
             for c in range(self.cols):
                 cell = (r, c)
 
+                # Skip already revealed, already played, or know mine cells
                 if obs[r, c] >= 0:
                     continue
                 if cell in self.moves_made or cell in self.mines:
@@ -170,19 +194,46 @@ class CSPStormAgent:
                     total_risk += risk
                     contributing_clues += 1
 
+            # Use average local risk when we have clue support
             if contributing_clues > 0:
-                risk_scores[cell] = total_risk / contributing_clues
+                avg_risk = total_risk / contributing_clues
             else:
-                risk_scores[cell] = 1.0  # no info → treat as risky
+                avg_risk = 1.0  # no info → treat as risky / uninformed guess
 
-        if not risk_scores:
+            is_corner = cell in [
+                (0, 0),
+                (0, self.cols -1),
+                (self.rows -1, 0),
+                (self.rows -1, self.cols -1)
+            ]
+
+            candidates.append((cell, avg_risk, contributing_clues, is_corner))
+
+        if not candidates:
             return None
 
-        print("[Prob Guess] Risk scores:", risk_scores)
-        safest_cell = min(risk_scores, key=risk_scores.get)
-        print(f"[Prob Guess] Choosing {safest_cell} with risk {risk_scores[safest_cell]:.3f}")
+        if DEBUG:
+            debug_scores = {
+                cell: {"risk": float(risk), "clues": clues, "corner": corner}
+                for cell, risk, clues, corner in candidates
+            }
+            print("[Prob Guess] Candidates:", debug_scores)
 
-        # time.sleep(2)
+        # Sort Priority:
+        # 1. Lower Risk
+        # 2. More Contributing Clues
+        # 3. Prefer Corners
+        candidates.sort(key=lambda x: (x[1], -x[2], -int(x[3])))
+        
+        safest_cell = candidates[0][0]
+        
+        if DEBUG:
+            print(
+                f"[Prob Guess] Choosing {safest_cell} "
+                f"with risk {candidates[0][1]:.3f}, "
+                f"clues {candidates[0][2]}, "
+                f"corner {canditates[0][3]}"
+            )
         
         return safest_cell
         
@@ -202,11 +253,13 @@ class CSPStormAgent:
                 return (safe[0], safe[1], 0)
             
         # 2) Guess
-        print("[CSP] No guaranteed safe move found. Using probability fallback...")
+        if DEBUG:
+            print("[CSP] No guaranteed safe move found. Using probability fallback...")
         guess = self.probabilistic_guess(obs)
 
         if guess and obs[guess[0], guess[1]] >= 0:
-            print(f"[BUG] Tried to guess already revealed cell: {guess}")
+            if DEBUG:
+                print(f"[BUG] Tried to guess already revealed cell: {guess}")
             return None
 
         if guess:
@@ -215,9 +268,10 @@ class CSPStormAgent:
 
 # --- Main Driver ---
 if __name__ == "__main__":
-    show_board = True
+    show_board = SHOW_BOARD_DEFAULT
+    interactive = INTERACTIVE_DEFAULT
     pause_between_moves = 0.5 if show_board else 0
-
+    
     wins = 0
     losses = 0
     game_num = 0
@@ -252,6 +306,8 @@ if __name__ == "__main__":
                 print_board(obs)
                 # time.sleep(pause_between_moves)
 
+        # Result Tracking
+
         if info.get("result") == "win":
             wins += 1
             print(">>> LOGIC WINS <<<")
@@ -270,8 +326,11 @@ if __name__ == "__main__":
         print(f"[TRACKER] Win Rate: {win_rate:.2f}%")
         print("-" * 50)
 
-        choice = input("Press Enter to run another game, or type 'q' to quit: ").strip().lower()
-        if choice == "q":
+        if interactive:
+            choice = input("Press Enter to run another game, or type 'q' to quit: ").strip().lower()
+            if choice == "q":
+                break
+        else:
             break
 
     print("\n" + "=" * 50)

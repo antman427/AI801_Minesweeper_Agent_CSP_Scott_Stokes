@@ -1,6 +1,6 @@
 import random
-from minesweeper_env import MinesweeperEnv
-from minesweeper_viz import clear_screen, print_board, print_header
+from backup_local.minesweeper_env import MinesweeperEnv
+from backup_local.minesweeper_viz import clear_screen, print_board, print_header
 import time
 
 class Sentence:
