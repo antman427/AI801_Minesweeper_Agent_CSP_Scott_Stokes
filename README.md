@@ -1,4 +1,4 @@
-# Algorithmic Decision-Making Under Uncertainty in Minesweeper
+# Minesweeper Agent using Constraint Satisfaction and Probabilistic Inference
 
 ## Overview
 This repository contains a suite of autonomous Artificial Intelligence agents designed to solve Minesweeper. Because the Minesweeper consistency problem is mathematically proven to be NP-complete, this project benchmarks various algorithmic approaches—ranging from deterministic Constraint Satisfaction (CSP) to Markov Chain Monte Carlo (MCMC)—to evaluate their performance in highly-coupled, expert-density environments.
