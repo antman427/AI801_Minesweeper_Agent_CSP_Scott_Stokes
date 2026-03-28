@@ -1,5 +1,10 @@
-from minesweeper_env import MinesweeperEnv
 import numpy as np
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from environment.minesweeper_env import MinesweeperEnv
 
 def print_board(obs):
     # Helper to make the numpy array look like a real board

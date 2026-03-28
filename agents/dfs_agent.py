@@ -1,14 +1,19 @@
-from minesweeper_env import MinesweeperEnv
-from minesweeper_viz import clear_screen, print_board, print_header
 import random
 import time
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from environment.minesweeper_env import MinesweeperEnv
+from environment.minesweeper_viz import clear_screen, print_board, print_header
 
 
 HIDDEN = -2
 FLAGGED = -3
 
 
-class SmartAgent:
+class DFSAgent:
     def __init__(self, env):
         self.env = env
         self.rows = env.height
@@ -196,7 +201,7 @@ if __name__ == "__main__":
     DELAY = 0.2
 
     env = MinesweeperEnv(width=9, height=9, mines=10)
-    agent = SmartAgent(env)
+    agent = DFSAgent(env)
 
     obs = env.reset()
     done = False

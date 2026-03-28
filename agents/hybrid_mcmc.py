@@ -1,11 +1,16 @@
-from minesweeper_env import MinesweeperEnv
-from csp_agent import CSPAgent
 import time
 import itertools
 import random
 import math
+import sys
+import os
 
-class MCMCAgent(CSPAgent):
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from environment.minesweeper_env import MinesweeperEnv
+from agents.baseline_csp import BaselineCSPAgent
+
+class HybridMCMCAgent(BaselineCSPAgent):
     """
     Advanced Agent utilizing Markov Chain Monte Carlo (Simulated Annealing)
     to estimate probabilities for massively constrained state spaces.

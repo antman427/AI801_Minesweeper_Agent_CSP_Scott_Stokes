@@ -1,13 +1,13 @@
-import os
-import sys
-
-sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-
-from backup_local.minesweeper_env import MinesweeperEnv
-from backup_local.minesweeper_viz import clear_screen, print_board, print_header
-
 import random
 import time
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from environment.minesweeper_env import MinesweeperEnv
+from environment.minesweeper_viz import clear_screen, print_board, print_header
+
 
 class Sentence:
     """
@@ -52,7 +52,7 @@ class Sentence:
         return f"{list(self.cells)} = {self.count}"
 
 
-class CSPStormAgent:
+class NaiveCSPAgent:
     def __init__(self, env):
         self.env = env
         self.rows = env.height
@@ -226,7 +226,7 @@ if __name__ == "__main__":
         game_num += 1
 
         env = MinesweeperEnv(9, 9, 10)
-        agent = CSPStormAgent(env)
+        agent = NaiveCSPAgent(env)
         obs = env.reset()
         done = False
         info = {}

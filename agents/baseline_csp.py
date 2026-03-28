@@ -1,7 +1,12 @@
 import random
-from minesweeper_env import MinesweeperEnv
-from minesweeper_viz import clear_screen, print_board, print_header
 import time
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from environment.minesweeper_env import MinesweeperEnv
+from environment.minesweeper_viz import clear_screen, print_board, print_header
 
 class Sentence:
     """
@@ -46,7 +51,7 @@ class Sentence:
         return f"{list(self.cells)} = {self.count}"
 
 
-class CSPAgent:
+class BaselineCSPAgent:
     def __init__(self, env):
         self.env = env
         self.rows = env.height
@@ -171,7 +176,7 @@ class CSPAgent:
 # --- Main Driver ---
 if __name__ == "__main__":
     env = MinesweeperEnv(9, 9, 10)
-    agent = CSPAgent(env)
+    agent = BaselineCSPAgent(env)
     obs = env.reset()
     done = False
 

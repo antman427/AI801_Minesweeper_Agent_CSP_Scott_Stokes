@@ -1,11 +1,16 @@
-from minesweeper_env import MinesweeperEnv
-from minesweeper_viz import clear_screen, print_board, print_header
-from csp_agent import CSPAgent
 import time
 import itertools
 import random
+import sys
+import os
 
-class HybridAgent(CSPAgent):
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from environment.minesweeper_env import MinesweeperEnv
+from environment.minesweeper_viz import clear_screen, print_board, print_header
+from agents.baseline_csp import BaselineCSPAgent
+
+class HybridMCAgent(BaselineCSPAgent):
     """
     Hybrid Agent with Monte Carlo Fallback.
     1. CSP Logic (Exact)
@@ -204,7 +209,7 @@ class HybridAgent(CSPAgent):
 if __name__ == "__main__":
     # Settings: Higher mine count to force the AI to guess more often
     env = MinesweeperEnv(9, 9, 12)
-    agent = HybridAgent(env)
+    agent = HybridMCAgent(env)
     obs = env.reset()
     done = False
 

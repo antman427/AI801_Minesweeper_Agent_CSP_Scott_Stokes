@@ -1,5 +1,10 @@
-from minesweeper_env import MinesweeperEnv
-from minesweeper_viz import clear_screen, print_board, print_header # <--- IMPORT HERE
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+
+from environment.minesweeper_env import MinesweeperEnv
+from environment.minesweeper_viz import clear_screen, print_board, print_header
 import random
 import time
 
