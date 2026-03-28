@@ -7,6 +7,7 @@ This repository contains a suite of autonomous Artificial Intelligence agents de
 * `/environment`: Contains the core `MinesweeperEnv` simulation API and terminal visualization tools.
 * `/agents`: Contains the five distinct AI architectures evaluated in this project.
 * `/tests`: Contains the automated benchmarking suite, human-playable terminal test, and plot generation scripts.
+* `/results`: Contains the results from the automated benchmarking suite.
 
 ## The Agents
 1. **Baseline CSP (`baseline_csp.py`)**: A deterministic logic solver utilizing algebraic subset inference.
