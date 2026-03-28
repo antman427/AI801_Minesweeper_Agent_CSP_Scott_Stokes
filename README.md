@@ -22,6 +22,6 @@ This repository contains a suite of autonomous Artificial Intelligence agents de
 
 Clone the repository and install the required dependencies:
 ```bash
-git clone [https://github.com/antman427/AI801_Minesweeper_Agent_CSP_Scott_Stokes.git](https://github.com/antman427/AI801_Minesweeper_Agent_CSP_Scott_Stokes.git)
+git clone https://github.com/antman427/AI801_Minesweeper_Agent_CSP_Scott_Stokes.git
 cd AI801_Minesweeper_Agent_CSP_Scott_Stokes
 pip install numpy matplotlib
