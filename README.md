@@ -11,6 +11,10 @@ This repository enables the empirical comparison of:
 2. **Search-tree bias analysis** using depth-first search constraints.
 3. **Advanced probabilistic inference** estimating risk distributions via Simulated Annealing.
 
+### Project Demonstration Video
+
+[![Minesweeper AI Demo](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+
 ## Key Features
 
 * **Custom Simulation Environment**: A fast, tensor-based Minesweeper simulation API that bypasses heavy GUI overhead for high-throughput automated testing.

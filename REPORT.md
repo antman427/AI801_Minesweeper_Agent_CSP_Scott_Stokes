@@ -74,14 +74,14 @@ Table 1 displays the aggregate metrics of the 5,000 total games simulated. The W
 
 ### 6.2 Graphed Results (Win Rates)
 
- 
+ ![Win Rates Chart](results/win_rates_chart.png)
 Figure 1: Comparison of agent win rates showing the Baseline CSP outperforming the probabilistic models.
 
 Figure 1 provides a visual comparison of the success rates across the five architectures. It clearly illustrates the Baseline CSP outperforming all probabilistic models, while the DFS agent registered a complete failure.
  
 ### 6.3 Graphed Results (Latency Rates)
 
- 
+ ![Computation Times Chart](results/computation_times_chart.png)
 Figure 2: Average computation time per game across the five agents
 
 Figure 2 charts the latency of each model. The Baseline CSP recorded the highest average time (0.0194s), largely because it survived the longest in its games before failing or winning, requiring more total calculations per run than the agents that failed early. 
@@ -90,7 +90,7 @@ Figure 2 charts the latency of each model. The Baseline CSP recorded the highest
 
 To maximize computational throughput for the 5,000 total games simulated during the benchmark, the front-end dashboard was implemented as a lightweight, low-latency terminal visualizer (minesweeper_viz.py) rather than a heavy graphical UI framework like Tkinter.
 
- 
+ ![Terminal Output](results/test_terminal.png)
 Figure 3: Terminal Visualizer Output
 
 Figure 3 displays the dynamic terminal output. The visualizer maps the internal numpy arrays to ASCII characters, allowing real-time observation of the agent's decision-making process. Flagged cells are marked 'F', covered cells are blank, and revealed clues show their corresponding integer.
