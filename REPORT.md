@@ -75,6 +75,7 @@ Table 1 displays the aggregate metrics of the 5,000 total games simulated. The W
 ### 6.2 Graphed Results (Win Rates)
 
 <img src="results/win_rates_chart.png" width="600" alt="Win Rates Chart">
+
 Figure 1: Comparison of agent win rates showing the Baseline CSP outperforming the probabilistic models.
 
 
@@ -83,6 +84,7 @@ Figure 1 provides a visual comparison of the success rates across the five archi
 ### 6.3 Graphed Results (Latency Rates)
 
 <img src="results/computation_times_chart.png" width="600" alt="Win Rates Chart">
+
 Figure 2: Average computation time per game across the five agents
 
 
