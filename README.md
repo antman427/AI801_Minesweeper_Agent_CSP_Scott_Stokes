@@ -13,7 +13,7 @@ This repository enables the empirical comparison of:
 
 ### Project Demonstration Video
 
-[![Minesweeper AI Demo](https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg)](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+[![Minesweeper AI Demo](https://youtu.be/cqBIVTrH_io)
 
 ## Key Features
 
