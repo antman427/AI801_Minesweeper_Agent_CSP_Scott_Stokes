@@ -13,7 +13,10 @@ This repository enables the empirical comparison of:
 
 ### Project Demonstration Video
 
-[![Minesweeper AI Demo](https://www.youtube.com/watch?v=cqBIVTrH_io)
+[![Minesweeper AI Demo](https://img.youtube.com/vi/cqBIVTrH_io/0.jpg)](https://youtu.be/cqBIVTrH_io)
+
+* **YouTube:** [Watch the Full Presentation & Code Demo](https://youtu.be/cqBIVTrH_io)
+* **Penn State Kaltura (Official Submission):** [Watch on MediaSpace](https://psu.mediaspace.kaltura.com/media/t/1_ffwcbotk)
 
 ## Key Features
 
